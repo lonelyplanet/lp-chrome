@@ -1,0 +1,88 @@
+// -----------------------------------------------------------------------------
+// Slim Reset
+// -----------------------------------------------------------------------------
+
+html {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+// Fixes jank with scrolling on iOS devices
+body {
+  -webkit-overflow-scrolling: touch;
+}
+
+html, body, div, span, iframe, h1, h2, h3, h4, h5,
+h6, p, blockquote, pre, a, abbr, acronym, address,
+cite, code, em, img, q, strong, sub, sup, dl, dt,
+dd, ol, ul, li, fieldset, form, label, table,
+tbody, tfoot, thead, tr, th, td, article, aside,
+canvas, figure, figcaption, footer, header,
+hgroup, nav, section, time, mark, audio, video,
+input, button, select, textarea {
+  margin: 0;
+  padding: 0;
+}
+
+nav ul {
+  list-style: none;
+}
+
+a > img {
+  display: block;
+}
+
+img {
+  -ms-interpolation-mode: bicubic; // Prevent some IE bugs in legacy code
+  max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
+fieldset {
+  border: 0;
+}
+
+time {
+  display: inline;
+}
+
+// Override Chrome's agressive defaults
+hr {
+  border: 0;
+  border-bottom: 1px solid $subduedgray;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  border-radius: 0;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+button,
+select {
+  line-height: normal;
+}
+
+button {
+  border: 0;
+  outline: none;
+}

@@ -1,22 +1,25 @@
 function placeFetched(place) {
-  let masthead = LP.utils.shuffle(place.mastheads).pop();
+  const masthead = LP.utils.shuffle(place.mastheads).pop();
 
-  let image = new Image();
-  let $attribution = document.querySelector(".attribution");
-  let contentFragment = document.createDocumentFragment();
+  const image = new Image();
+  const $attribution = document.querySelector(".attribution");
+  const contentFragment = document.createDocumentFragment();
 
-  let $inspire = document.querySelector(".js-inspire");
-  let placeFragment = document.createDocumentFragment();
+  const $inspire = document.querySelector(".js-inspire");
+  const placeFragment = document.createDocumentFragment();
 
-  let strapline = masthead.strapline ? masthead.strapline : "";
-  placeFragment.textContent = `${place.name} ${strapline}`;
+  const strapline = masthead.strapline ? masthead.strapline : "";
+  placeFragment.textContent = `${place.name}`;
   $inspire.appendChild(placeFragment);
 
-  let $inspireLink = document.querySelector(".js-inspire-link");
+  const $inspireLink = document.querySelector(".js-inspire-link");
   $inspireLink.href = `https://www.lonelyplanet.com/${place.slug}?utm_source=chrome-ext`;
 
-  let width = (function() {
-    let winWidth = document.body.offsetWidth;
+  const $strapline = document.querySelector(".js-strapline");
+  $strapline.textContent = strapline;
+
+  const width = (function() {
+    const winWidth = document.body.offsetWidth;
     if (winWidth >= 1920) {
       return 1920;
     } else if (winWidth > 1024 && winWidth < 1920) {
@@ -40,7 +43,7 @@ function placeFetched(place) {
 
 
 (function() { 
-  let place = localStorage.getItem("place"), date = localStorage.getItem("last-updated");
+  const place = localStorage.getItem("place"), date = localStorage.getItem("last-updated");
   
   if (place && (date && (new Date() - new Date(date)) < 3600000)) {
     placeFetched(JSON.parse(place));

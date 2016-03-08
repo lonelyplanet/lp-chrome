@@ -91,9 +91,17 @@ gulp.task('babel', () => {
       .pipe(gulp.dest('app/scripts'));
 });
 
+var sass = require('gulp-sass');
+ 
+gulp.task('sass', function () {
+  return gulp.src('./app/sass/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./app/styles/'));
+});
+
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('watch', ['lint', 'babel', 'html'], () => {
+gulp.task('watch', ['lint', 'babel', 'html', 'sass'], () => {
   $.livereload.listen();
 
   gulp.watch([
@@ -101,10 +109,11 @@ gulp.task('watch', ['lint', 'babel', 'html'], () => {
     'app/scripts/**/*.js',
     'app/images/**/*',
     'app/styles/**/*',
-    'app/_locales/**/*.json'
+    'app/_locales/**/*.json',
   ]).on('change', $.livereload.reload);
 
   gulp.watch('app/scripts.babel/**/*.js', ['lint', 'babel']);
+  gulp.watch('app/sass/**/*.scss', ['sass']);
   gulp.watch('bower.json', ['wiredep']);
 });
 
@@ -129,7 +138,7 @@ gulp.task('package', function () {
 
 gulp.task('build', (cb) => {
   runSequence(
-    /*'lint',*/ 'babel', 'chromeManifest',
+    /*'lint',*/ 'babel', 'sass','chromeManifest',
     ['html', 'images', 'extras'],
     'size', cb);
 });
