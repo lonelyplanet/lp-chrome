@@ -432,7 +432,7 @@ button {
 html {
   height: 100%; }
 
-body {
+body, .wrapper {
   min-height: 100vh;
   overflow: hidden;
   height: 100%;
@@ -490,7 +490,7 @@ body {
 
 #header-logo {
   fill: white;
-  width: 142px; }
+  width: 100px; }
 
 .content, .header, .search {
   text-align: center;
@@ -524,18 +524,18 @@ body {
   font-family: 'Miller Daily';
   font-style: italic;
   letter-spacing: 1px;
-  font-size: 30px;
+  font-size: 24px;
   color: white;
   font-weight: normal; }
 
 .inspire__header {
   color: white;
-  font-size: 90px;
+  font-size: 100px;
   font-weight: 600;
   letter-spacing: -3px;
   line-height: .9;
-  margin-bottom: 30px;
-  margin-top: 70px; }
+  margin-bottom: 24px;
+  margin-top: 55px; }
 
 .inspire__link {
   text-decoration: none; }
@@ -559,6 +559,7 @@ body {
   align-items: center; }
 
 .footer {
+  text-align: center;
   position: absolute;
   bottom: 40px;
   width: 100%; }
@@ -588,3 +589,25 @@ body {
 
 .svg-icon--spin {
   animation: spin .5s linear infinite; }
+
+.masthead {
+  position: absolute;
+  object-fit: cover;
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 0;
+  transition: opacity 200ms ease-in; }
+  .masthead.is-active {
+    opacity: 1; }
+
+.social {
+  margin: 0 auto; }
+
+.icon-twitter, .icon-facebook {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 16px;
+  height: 16px;
+  fill: white;
+  cursor: pointer; }
