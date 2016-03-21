@@ -1,5 +1,33 @@
+"use strict";
+
+function imgixPath(path, width) {
+  return `https://lonelyplanetimages.imgix.net${path.startsWith('/') ? '' : '/'}${path}?w=${width}&auto=enhance&q=50&fit=crop`;
+}
+
+function preloadImages(mastheads, width) {
+  const images = mastheads.map((m) => m.path);
+
+  for (let path of images) {
+    const image = new Image();
+    image.src = imgixPath(path, width);
+  }
+}
+
 function placeFetched(place) {
   const masthead = LP.utils.shuffle(place.mastheads).pop();
+
+  const width = (function() {
+    const winWidth = document.body.offsetWidth;
+    if (winWidth >= 1920) {
+      return 2400;
+    } else if (winWidth > 1024 && winWidth < 1920) {
+      return 1920;
+    } else {
+      return 1024;
+    }
+  }());
+
+  preloadImages(place.mastheads, width);
 
   const $wrapper = document.querySelector(".js-wrapper");
 
@@ -20,18 +48,7 @@ function placeFetched(place) {
   const $strapline = document.querySelector(".js-strapline");
   $strapline.textContent = strapline;
 
-  const width = (function() {
-    const winWidth = document.body.offsetWidth;
-    if (winWidth >= 1920) {
-      return 2400;
-    } else if (winWidth > 1024 && winWidth < 1920) {
-      return 1920;
-    } else {
-      return 1024;
-    }
-  }());
-
-  image.src = `https://lonelyplanetimages.imgix.net/${masthead.path}?w=${width}&auto=enhance&q=50&fit=crop`;
+  image.src = imgixPath(masthead.path, width);
 
   contentFragment.textContent = masthead.attribution;
   $attribution.appendChild(contentFragment);
