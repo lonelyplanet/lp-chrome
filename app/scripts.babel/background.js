@@ -7,6 +7,8 @@ function navigate(url) {
     active: true,
     currentWindow: true
   }, function(tabs) {
+    if (!tabs) return;
+
     chrome.tabs.update(tabs[0].id, {
       url: url
     });
@@ -35,9 +37,18 @@ chrome.omnibox.onInputChanged.addListener(
 // This event is fired with the user accepts the input in the omnibox.
 chrome.omnibox.onInputEntered.addListener(
   function(text) {
-    if (!text) return;
-    navigate(text);
+    if (text.indexOf("http") > -1) {
+      navigate(text);
+    } else {
+      navigate(`https://www.lonelyplanet.com/search?q=${text}`)
+    }
   });
+
+chrome.omnibox.onInputCancelled.addListener(() => {
+  return false;
+});
+
+
 
 chrome.omnibox.setDefaultSuggestion({
   description: 'lp: Search Lonely Planet for %s'

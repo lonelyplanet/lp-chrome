@@ -596,7 +596,7 @@ body {
   min-width: 100%;
   min-height: 100%;
   opacity: 0;
-  transition: opacity 200ms ease-in; }
+  transition: opacity 100ms ease-in; }
   .masthead.is-active {
     opacity: 1; }
 

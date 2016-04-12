@@ -43,7 +43,7 @@ function placeFetched(place) {
   $inspire.appendChild(placeFragment);
 
   const $inspireLink = document.querySelector(".js-inspire-link");
-  $inspireLink.href = `https://www.lonelyplanet.com/${place.slug}?utm_source=chrome-ext`;
+  $inspireLink.href = `https://www.lonelyplanet.com/${place.slug}?utm_campaign=lp-chome-ext&utm_source=chrome-ext&utm_medium=chrome-ext`;
 
   const $strapline = document.querySelector(".js-strapline");
   $strapline.textContent = strapline;
@@ -104,7 +104,7 @@ function socialShare({ network, width=550, height=420, url, text }) {
 (function() { 
   const place = localStorage.getItem("place"), date = localStorage.getItem("last-updated");
   
-  if (place && (date && (new Date() - new Date(date)) < 3600000)) {
+  if (place && (date && (new Date() - new Date(date)) < 1800000)) {
     placeFetched(JSON.parse(place));
   } else {
     LP.core.fetch("https://0hhmjq0t6i.execute-api.us-east-1.amazonaws.com/prod/placeFetch").then(function(place) {
