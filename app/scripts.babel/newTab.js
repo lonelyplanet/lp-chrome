@@ -4,6 +4,16 @@ function imgixPath(path, width) {
   return `https://lonelyplanetimages.imgix.net${path.startsWith('/') ? '' : '/'}${path}?w=${width}&auto=enhance&q=50&fit=crop`;
 }
 
+var _gaq = _gaq || [];
+_gaq.push(["_setAccount", "UA-84547901-1"]);
+_gaq.push(["_trackPageview"]);
+
+(function() {
+  var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;
+  ga.src = "https://ssl.google-analytics.com/ga.js";
+  var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);
+})();
+
 function preloadImages(mastheads, width) {
   const images = mastheads.map((m) => m.path);
 
@@ -93,10 +103,12 @@ function socialShare({ network, width=550, height=420, url, text }) {
       windowSize = `width=${width},height=${height},left=${left},top=${top}`;
 
   if (network === "twitter") {
+    _gaq.push(["_trackEvent", "share", "twitter", url]);
     window.open(`https://twitter.com/intent/tweet?text=${text}`, "share", `${windowOptions},${windowSize}`);
   }
 
   if (network === "facebook") {
+    _gaq.push(["_trackEvent", "share", "facebook", url]);
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, "share", `${windowOptions},${windowSize}`);
   }
 }
@@ -108,6 +120,10 @@ function socialShare({ network, width=550, height=420, url, text }) {
     placeFetched(JSON.parse(place));
   } else {
     LP.core.fetch("https://0hhmjq0t6i.execute-api.us-east-1.amazonaws.com/prod/placeFetch").then(function(place) {
+      if (!place) {
+        _gaq.push(["_trackEvent", "error", "fetch", "Place fetch failed."]);
+        return;
+      }
       localStorage.setItem("place", JSON.stringify(place));
       localStorage.setItem("last-updated", new Date());
       placeFetched(place);

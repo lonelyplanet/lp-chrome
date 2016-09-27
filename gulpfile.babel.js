@@ -101,7 +101,7 @@ gulp.task('sass', function () {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('watch', ['lint', 'babel', 'html', 'sass'], () => {
+gulp.task('watch', ['babel', 'html', 'sass'], () => {
   $.livereload.listen();
 
   gulp.watch([
@@ -112,7 +112,7 @@ gulp.task('watch', ['lint', 'babel', 'html', 'sass'], () => {
     'app/_locales/**/*.json',
   ]).on('change', $.livereload.reload);
 
-  gulp.watch('app/scripts.babel/**/*.js', ['lint', 'babel']);
+  gulp.watch('app/scripts.babel/**/*.js', ['babel']);
   gulp.watch('app/sass/**/*.scss', ['sass']);
   gulp.watch('bower.json', ['wiredep']);
 });
