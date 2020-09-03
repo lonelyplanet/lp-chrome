@@ -26,7 +26,7 @@
     "gulp-useref": "^1.1.1",
     "gulp-zip": "^3.0.2",
     "main-bower-files": "^2.5.0",
-    "node-sass": "^3.4.2",
+    "node-sass": "^4.14.1",
     "run-sequence": "^1.1.4",
     "wiredep": "^2.2.2"
   },
